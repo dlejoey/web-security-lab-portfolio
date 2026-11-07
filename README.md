@@ -1,32 +1,39 @@
-# Web Application Security Lab Portfolio
+# Web Application Security | Technical Portfolio
 
-**Junior Web Application Security Tester** | Hands-on learning and security research
+**Junior Web Application Security Tester**
 
-This repository documents practical web application security exercises, including how I investigated vulnerabilities, verified their impact in authorized training environments, and recommended mitigations.
+Hands-on experience investigating web application vulnerabilities, examining HTTP requests and responses, testing access controls, and documenting findings with actionable remediation recommendations.
 
-## Completed PortSwigger Web Security Academy labs
+This repository presents reproducible security assessments completed in **authorized, intentionally vulnerable environments**. Each report separates endpoint discovery from vulnerability verification and documents the observed security impact.
 
-| Lab | Category | Key learning | Report |
-| --- | --- | --- | --- |
-| 001 — Unprotected admin functionality | Broken Access Control | Discovered an admin endpoint via `robots.txt` and verified missing authorization | [Read report](reports/001-unprotected-admin-functionality.md) |
-| 002 — Unprotected admin functionality with unpredictable URL | Broken Access Control | Identified an admin endpoint in client-side JavaScript and verified missing authorization | [Read report](reports/002-unpredictable-admin-url.md) |
+## Security assessment reports
 
-## Tools and concepts
+| ID | Assessment | Vulnerability class | Discovery technique | Report |
+| --- | --- | --- | --- | --- |
+| 001 | Unprotected admin functionality | Broken Access Control | `robots.txt` endpoint disclosure | [View assessment](reports/001-unprotected-admin-functionality.md) |
+| 002 | Unprotected admin functionality with unpredictable URL | Broken Access Control | Client-side JavaScript source inspection | [View assessment](reports/002-unpredictable-admin-url.md) |
 
-- Burp Suite (Proxy HTTP history and Repeater)
-- Browser developer tools and HTML/JavaScript source inspection
-- HTTP requests, responses, and endpoints
-- Authentication versus authorization
-- Access-control verification and remediation
+**Results:** Both PortSwigger Web Security Academy labs were completed successfully.
 
-## Scope and ethics
+## Demonstrated technical capabilities
 
-All findings documented here come from **intentionally vulnerable enviroment**. They are training exercises, not findings from a client engagement. I test only systems I own or am explicitly authorized to assess.
+- **Reconnaissance and endpoint discovery:** Inspecting publicly accessible application files and client-side source code to identify relevant paths
+- **Authorization testing:** Verifying whether privileged functions enforce server-side access controls
+- **HTTP analysis:** Inspecting application requests and responses using Burp Suite and browser tools
+- **Security reporting:** Documenting reproduction steps, observed impact, and remediation recommendations
 
-## Evidence
+## Tools and technologies
 
-Completion screenshots and supporting request/response captures can be added under `evidence/`. The reports describe observed behavior; no screenshots are claimed as uploaded until they appear in the repository.
+Burp Suite (Proxy and Repeater) · HTTP/HTTPS · HTML and JavaScript inspection · Browser tools · PortSwigger Web Security Academy
 
-## Ongoing development
+## Assessment evidence
 
-Im still builing practical skills in web application and API security, with an emphasis on clear technical reasoning and reproducible reporting.
+The reports include reproduction steps and observed outcomes. Supporting screenshots will be linked after they are uploaded to the repository; no screenshots are represented as currently published.
+
+## Scope and authorization
+
+These assessments were performed against **PortSwigger Web Security Academy training labs**, not live client systems. The applications are intentionally vulnerable, and the described actions were part of the lab objectives. Testing is limited to owned or explicitly authorized environments.
+
+## Technical focus
+
+Web application and API security, with an emphasis on authorization testing, vulnerability verification, and clear, reproducible technical reporting.
