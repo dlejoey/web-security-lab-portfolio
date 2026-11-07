@@ -21,7 +21,7 @@ This repository documents practical web application security exercises, includin
 
 ## Scope and ethics
 
-All findings documented here come from **intentionally vulnerable PortSwigger Web Security Academy labs**. They are training exercises, not findings from a client engagement. I test only systems I own or am explicitly authorized to assess.
+All findings documented here come from **intentionally vulnerable**. They are training exercises, not findings from a client engagement. I test only systems I own or am explicitly authorized to assess.
 
 ## Evidence
 
@@ -29,4 +29,4 @@ Completion screenshots and supporting request/response captures can be added und
 
 ## Ongoing development
 
-I am continuing to build practical skills in web application and API security, with an emphasis on clear technical reasoning and reproducible reporting.
+Im still builing practical skills in web application and API security, with an emphasis on clear technical reasoning and reproducible reporting.
