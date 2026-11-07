@@ -1,37 +1,57 @@
-# Lab 001 — Unprotected admin functionality
+# Assessment 001 — Unprotected Admin Functionality
 
 **Platform:** PortSwigger Web Security Academy  
-**Category:** Broken Access Control  
-**Environment:** Authorized, intentionally vulnerable training lab  
-**Outcome:** Solved
+**Vulnerability class:** Broken Access Control  
+**Test environment:** Authorized, intentionally vulnerable lab  
+**Status:** Solved
 
-## Objective
-Investigate whether administrative functionality is protected from unauthenticated or non-administrator visitors.
+## 1. Assessment overview
 
-## Investigation
-1. Opened the lab's online shop.
-2. Requested `/robots.txt` on the lab host.
-3. Found the disclosed path `Disallow: /administrator-panel`.
-4. Navigated to `/administrator-panel` on the same lab host.
-5. Observed an accessible administrator interface with user-management actions.
-6. Used the lab's **Delete** action for the designated training user `carlos`, completing the exercise.
+**Objective:** Determine whether an ordinary visitor can discover and use administrative functionality without administrator authorization.
 
-## Finding
-**Missing server-side authorization on an administrative endpoint.** The admin interface and its user-management action were available without an administrator privilege check sufficient to block the lab visitor.
+**Result:** An administrative user-management interface was reachable, and the lab's designated user-deletion action succeeded without an administrator privilege check sufficient to prevent it.
 
-The entry in `robots.txt` helped **discover** the path; publishing a path there is not, by itself, the access-control failure.
+## 2. Testing methodology
 
-## Impact
-An unauthorized visitor could reach administrative functionality and delete user accounts in the training application. In a production application, analogous flaws could permit unauthorized account changes or other privileged operations.
+1. Accessed the lab's online shop.
+2. Inspected the site's `/robots.txt` file.
+3. Identified an administrative path in its crawler directives.
+4. Requested the disclosed path directly in the browser.
+5. Examined the accessible administrative interface and its user-management actions.
+6. Executed the lab-authorized deletion of the designated training user, `carlos`, and completed the exercise.
 
-## Recommended remediation
-- Enforce server-side authorization for every administrative route and action.
-- Apply deny-by-default access policies and check roles or permissions on each request.
-- Avoid relying on hidden links, `robots.txt`, or client-side controls as security boundaries.
-- Add automated tests ensuring non-admin users cannot access privileged functions.
+## 3. Vulnerability identified
 
-## Evidence
-The lab was completed during the hands-on session. Completion and request screenshots may be added to the repository separately.
+**Finding:** Missing server-side authorization for administrative functionality.
 
-## What I learned
-Endpoint discovery and vulnerability verification are different: the issue is not knowing an admin URL, but being able to perform privileged actions without the required authorization.
+The publicly readable `robots.txt` file disclosed the endpoint:
+
+```text
+User-agent: *
+Disallow: /administrator-panel
+```
+
+The disclosure was a **discovery clue**, not the underlying vulnerability. The security failure was that a visitor lacking administrator privileges could access the endpoint and use a privileged function.
+
+## 4. Proof of concept and evidence
+
+**Endpoint:** `/administrator-panel`
+
+**Observed behavior:** The admin interface displayed user-management actions, including deletion. The authorized training action against `carlos` succeeded, satisfying the lab objective.
+
+**Evidence status:** Lab completion was observed during testing. Screenshots and raw HTTP captures have not yet been uploaded to this repository.
+
+## 5. Security impact
+
+Missing authorization on privileged operations can permit unauthorized user-account modification or deletion. The demonstrated impact is limited to the intentionally vulnerable training application; production impact would depend on the actual functions exposed.
+
+## 6. Remediation recommendations
+
+- Enforce server-side authorization checks for every administrative route and state-changing operation.
+- Apply deny-by-default access policies and validate permissions on each request.
+- Never treat hidden URLs, navigation visibility, or `robots.txt` directives as access controls.
+- Add automated negative tests confirming that non-admin sessions cannot access privileged operations.
+
+## 7. Technical analysis
+
+Endpoint enumeration identifies potential attack surfaces; it does not prove exploitation. The decisive test is whether the server rejects a request made without the privileges required for that operation. In this lab, the server permitted an administrative action, demonstrating broken access control.
