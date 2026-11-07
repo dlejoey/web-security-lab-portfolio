@@ -10,13 +10,15 @@ Documented web application security assessments covering endpoint discovery, aut
 | --- | --- | --- | --- | --- |
 | 001 | Unprotected admin functionality | Unauthorized access to administrative user-management functionality | `robots.txt` | [Assessment 001](reports/001-unprotected-admin-functionality.md) |
 | 002 | Unprotected admin functionality with unpredictable URL | Unauthorized access to administrative functionality despite a hidden navigation link | Client-side JavaScript inspection | [Assessment 002](reports/002-unpredictable-admin-url.md) |
+| 003 | User role controlled by request parameter | Vertical privilege escalation via editable administrator cookie | Cookie inspection and Burp Repeater request manipulation | [Assessment 003](reports/003-user-role-controlled-by-request-parameter.md) |
 
-**Outcome:** Both assessments completed successfully in PortSwigger Web Security Academy.
+**Outcome:** All three assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
 - Identified administrative endpoints through publicly accessible application files and client-side source code
 - Tested whether server-side authorization prevented non-admin access to privileged functions
+- Manipulated client-controlled role cookies and verified unauthorized access to administrative functionality
 - Analyzed web requests, endpoints, and application behavior using Burp Suite and browser inspection tools
 - Documented findings with reproduction steps, impact, and remediation recommendations
 
