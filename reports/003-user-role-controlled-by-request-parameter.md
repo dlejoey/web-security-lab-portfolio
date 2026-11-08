@@ -1,62 +1,45 @@
 # Assessment 003 — User Role Controlled by Request Parameter
 
 **Platform:** PortSwigger Web Security Academy  
-**Lab:** User role controlled by request parameter  
-**Vulnerability class:** Broken Access Control — Vertical Privilege Escalation  
-**Test environment:** Authorized, intentionally vulnerable lab  
+**Vulnerability:** Broken Access Control (Privilege Escalation)  
 **Status:** Solved
 
-## 1. Assessment overview
+## 1. Overview
 
-**Objective:** Determine whether a normal authenticated user can obtain administrative access by modifying client-supplied role information.
+I tested whether a normal user could access the admin panel by changing a cookie value.
 
-**Result:** Changing the `Admin` cookie from `false` to `true` caused the application to expose the admin link and accept a request to `/admin`. The administrative interface displayed user-management actions. A request to delete the lab-designated user `carlos` returned an HTTP 302 redirect to `/admin`, and the lab displayed its solved confirmation.
+I found that changing `Admin=false` to `Admin=true` allowed me to access the admin panel and delete a user.
 
-## 2. Testing methodology
+## 2. How I Tested It
 
-1. Logged in with the standard user account supplied by the lab.
-2. Used Burp Suite Proxy / HTTP history to inspect requests and cookies associated with the authenticated session.
-3. Identified a client-supplied `Admin=false` role indicator.
-4. Sent an authenticated request to Burp Repeater and modified the role indicator to `Admin=true`.
-5. Observed an administrator-panel link in the resulting HTML.
-6. Requested `GET /admin` with the modified cookie and observed the administrative interface, including user-management controls.
-7. Requested the lab-authorized deletion endpoint for `carlos` and observed a `302 Found` response with `Location: /admin`.
-8. Confirmed completion from the PortSwigger Academy “Congratulations, you solved the lab!” banner.
+1. Logged in with the account provided by PortSwigger.
+2. Used Burp Suite to check the website's requests and cookies.
+3. Found a cookie named `Admin` with the value `false`.
+4. Changed it to `true` using Burp Repeater.
+5. Accessed `/admin` and saw the list of users.
+6. Sent a request to delete `carlos`, the lab's test user.
+7. Received a `302` redirect, and PortSwigger confirmed the lab was solved.
 
-## 3. Vulnerability identified
+## 3. Security Issue
 
-**Finding:** The application relied on a client-modifiable role cookie for administrative authorization.
+The website trusted a cookie that users could change themselves.
 
-Illustrative request header (session token redacted):
+This allowed a normal user to gain admin privileges without being an actual administrator.
 
-```http
-Cookie: session=<redacted>; Admin=true
-```
+## 4. Impact
 
-A regular authenticated user could change the administrator flag and reach server-side privileged functionality. The finding is not merely that an admin link became visible: the `/admin` endpoint itself exposed protected administrative features.
+Someone could access private admin information or perform actions they shouldn't be allowed to, such as deleting user accounts.
 
-## 4. Proof of concept and evidence
+## 5. Recommended Fix
 
-- **Role manipulation:** `Admin=false` changed to `Admin=true` in Burp Repeater.
-- **Privileged access:** `GET /admin` returned the administrative interface listing `wiener` and `carlos`, including delete links.
-- **Administrative action:** `GET /admin/delete?username=carlos` returned `HTTP/2 302 Found` with `Location: /admin`.
-- **Verified outcome:** PortSwigger lab displayed its solved confirmation.
+The server should check a user's actual permissions before allowing access to admin features.
 
-**Evidence status:** Screenshots of the Burp requests/responses and solved lab were captured during the assessment but have not yet been uploaded to this repository. The 302 response alone is not treated as proof of deletion; the lab's solved confirmation corroborates the outcome.
+Changing a cookie should never be enough to gain admin access.
 
-## 5. Security impact
+## 6. Evidence
 
-An ordinary user could elevate access to administrator-only functionality by modifying data under their own control. This permits unauthorized access to protected user information and administrative actions such as deleting accounts, compromising confidentiality, integrity, and potentially availability.
+The admin panel was accessed, the test user was deleted, and PortSwigger displayed the successful lab completion message.
 
-## 6. Remediation recommendations
+Screenshots are pending upload.
 
-- Determine roles and privileges from trusted server-side account/session state, not an editable client cookie.
-- Enforce authorization on every administrative endpoint and each state-changing operation.
-- Reject unauthorized requests even when the client displays or submits administrator-specific links or parameters.
-- Add regression tests that replay privileged requests with standard-user sessions and modified client-controlled role values.
-
-## 7. Technical analysis
-
-The session cookie identifies the authenticated user; the separate `Admin` flag purported to define that user's authorization level. Modifying the flag did not authenticate the user as a different account. Instead, it caused the application to treat the existing ordinary-user session as privileged — a vertical privilege-escalation failure.
-
-**Scope note:** This report documents an intentionally vulnerable PortSwigger training application, not a commercial client assessment.
+*Testing was carried out in PortSwigger's authorized practice environment.*
