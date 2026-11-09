@@ -12,14 +12,16 @@ Documented web application security assessments covering endpoint discovery, aut
 | 002 | Unprotected admin functionality with unpredictable URL | Unauthorized access to administrative functionality despite a hidden navigation link | Client-side JavaScript inspection | [Assessment 002](reports/002-unpredictable-admin-url.md) |
 | 003 | User role controlled by request parameter | Admin access through an editable cookie | Cookie testing in Burp Repeater | [Assessment 003](reports/003-user-role-controlled-by-request-parameter.md) |
 | 004 | User role can be modified in user profile | Admin access through an email-change request | JSON request editing in Burp Repeater | [Assessment 004](reports/004-user-role-can-be-modified-in-user-profile.md) |
+| 005 | Insecure direct object references (IDOR) | Another user's private chat transcript exposed through filename change | Transcript download request tested in Burp Repeater | [Assessment 005](reports/005-insecure-direct-object-references.md) |
 
-**Outcome:** All four assessments completed successfully in PortSwigger Web Security Academy.
+**Outcome:** All five assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
 - Identified administrative endpoints through publicly accessible application files and client-side source code
 - Tested whether server-side authorization prevented non-admin access to privileged functions
 - Changed role cookies and profile request fields to test for unauthorized admin access
+- Tested transcript download URLs and confirmed unauthorized access to another user's chat
 - Analyzed web requests, endpoints, and application behavior using Burp Suite and browser inspection tools
 - Documented findings with reproduction steps, impact, and remediation recommendations
 
