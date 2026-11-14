@@ -17,7 +17,9 @@ Documented web application security assessments covering endpoint discovery, aut
 | 007 | Method-based access control can be circumvented | Privilege escalation through inconsistent GET/POST authorization | HTTP method and query-parameter testing in Burp Repeater | [Assessment 007](reports/007-method-based-access-control.md) |
 | 008 | User ID controlled by request parameter | Cross-account disclosure of Carlos's API key | User ID query-parameter testing in Burp Repeater | [Assessment 008](reports/008-user-id-controlled-by-request-parameter.md) |
 
-**Outcome:** All eight assessments completed successfully in PortSwigger Web Security Academy.
+| 011 | User ID controlled by request parameter with password disclosure | Administrator password disclosed, enabling account takeover | Account ID manipulation and HTML response inspection | [Assessment 011](reports/011-user-id-password-disclosure.md) |
+
+**Outcome:** Nine documented assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
@@ -26,6 +28,7 @@ Documented web application security assessments covering endpoint discovery, aut
 - Changed role cookies and profile request fields to test for unauthorized admin access
 - Tested transcript download URLs and confirmed unauthorized access to another user's chat
 - Confirmed cross-account API key exposure through a user-controlled account ID parameter
+- Demonstrated administrator credential disclosure and account takeover through missing object-level authorization
 - Bypassed URL-based admin restrictions using the X-Original-URL header
 - Verified method-dependent authorization failure by comparing rejected POST with successful GET role-change requests
 - Analyzed web requests, endpoints, and application behavior using Burp Suite and browser inspection tools
