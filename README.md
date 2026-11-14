@@ -17,9 +17,11 @@ Documented web application security assessments covering endpoint discovery, aut
 | 007 | Method-based access control can be circumvented | Privilege escalation through inconsistent GET/POST authorization | HTTP method and query-parameter testing in Burp Repeater | [Assessment 007](reports/007-method-based-access-control.md) |
 | 008 | User ID controlled by request parameter | Cross-account disclosure of Carlos's API key | User ID query-parameter testing in Burp Repeater | [Assessment 008](reports/008-user-id-controlled-by-request-parameter.md) |
 
+| 009 | User ID controlled by request parameter, with unpredictable user IDs | Cross-account API key disclosure despite unpredictable IDs | Public blog-author identifier discovery and account ID substitution | [Assessment 009](reports/009-user-id-unpredictable-ids.md) |
+| 010 | User ID controlled by request parameter with data leakage in redirect | Carlos's API key exposed in the HTTP response despite redirect behavior | Burp Repeater response-body inspection | [Assessment 010](reports/010-user-id-data-leakage-in-redirect.md) |
 | 011 | User ID controlled by request parameter with password disclosure | Administrator password disclosed, enabling account takeover | Account ID manipulation and HTML response inspection | [Assessment 011](reports/011-user-id-password-disclosure.md) |
 
-**Outcome:** Nine documented assessments completed successfully in PortSwigger Web Security Academy.
+**Outcome:** All eleven assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
@@ -28,6 +30,7 @@ Documented web application security assessments covering endpoint discovery, aut
 - Changed role cookies and profile request fields to test for unauthorized admin access
 - Tested transcript download URLs and confirmed unauthorized access to another user's chat
 - Confirmed cross-account API key exposure through a user-controlled account ID parameter
+- Identified cross-account API key exposure despite unpredictable user IDs and redirect behavior
 - Demonstrated administrator credential disclosure and account takeover through missing object-level authorization
 - Bypassed URL-based admin restrictions using the X-Original-URL header
 - Verified method-dependent authorization failure by comparing rejected POST with successful GET role-change requests
