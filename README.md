@@ -21,7 +21,9 @@ Documented web application security assessments covering endpoint discovery, aut
 | 010 | User ID controlled by request parameter with data leakage in redirect | Carlos's API key exposed in the HTTP response despite redirect behavior | Burp Repeater response-body inspection | [Assessment 010](reports/010-user-id-data-leakage-in-redirect.md) |
 | 011 | User ID controlled by request parameter with password disclosure | Administrator password disclosed, enabling account takeover | Account ID manipulation and HTML response inspection | [Assessment 011](reports/011-user-id-password-disclosure.md) |
 
-**Outcome:** All eleven assessments completed successfully in PortSwigger Web Security Academy.
+| 012 | Multi-step process with no access control on one step | Privilege escalation through an unprotected role-change confirmation step | Burp Repeater request replay using a standard-user session | [Assessment 012](reports/012-multi-step-process-access-control.md) |
+
+**Outcome:** All twelve assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
@@ -34,6 +36,7 @@ Documented web application security assessments covering endpoint discovery, aut
 - Demonstrated administrator credential disclosure and account takeover through missing object-level authorization
 - Bypassed URL-based admin restrictions using the X-Original-URL header
 - Verified method-dependent authorization failure by comparing rejected POST with successful GET role-change requests
+- Demonstrated a multi-step workflow authorization bypass by replaying a privileged confirmation request as a standard user
 - Analyzed web requests, endpoints, and application behavior using Burp Suite and browser inspection tools
 - Documented findings with reproduction steps, impact, and remediation recommendations
 
@@ -43,7 +46,7 @@ Burp Suite (Proxy and Repeater) · HTTP/HTTPS · HTML/JavaScript source inspecti
 
 ## Evidence
 
-Reproduction steps and verified outcomes are documented in each assessment. Supporting screenshots are pending upload.
+Reproduction steps and verified outcomes are documented in each assessment. Supporting screenshots are being prepared for upload, with session tokens redacted.
 
 ## Assessment scope
 
