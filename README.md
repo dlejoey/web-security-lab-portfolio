@@ -23,7 +23,9 @@ Documented web application security assessments covering endpoint discovery, aut
 
 | 012 | Multi-step process with no access control on one step | Privilege escalation through an unprotected role-change confirmation step | Burp Repeater request replay using a standard-user session | [Assessment 012](reports/012-multi-step-process-access-control.md) |
 
-**Outcome:** All twelve assessments completed successfully in PortSwigger Web Security Academy.
+| 013 | Referer-based access control | Privilege escalation by replaying role change with a normal user's session and admin-page Referer | Session and Referer header testing in Burp Repeater | [Assessment 013](reports/013-referer-based-access-control.md) |
+
+**Outcome:** All thirteen assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
@@ -37,6 +39,7 @@ Documented web application security assessments covering endpoint discovery, aut
 - Bypassed URL-based admin restrictions using the X-Original-URL header
 - Verified method-dependent authorization failure by comparing rejected POST with successful GET role-change requests
 - Demonstrated a multi-step workflow authorization bypass by replaying a privileged confirmation request as a standard user
+- Verified privilege escalation through a role-management endpoint that relied on the Referer header instead of enforcing user permissions
 - Analyzed web requests, endpoints, and application behavior using Burp Suite and browser inspection tools
 - Documented findings with reproduction steps, impact, and remediation recommendations
 
