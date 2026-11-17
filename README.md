@@ -24,8 +24,9 @@ Documented web application security assessments covering endpoint discovery, aut
 | 012 | Multi-step process with no access control on one step | Privilege escalation through an unprotected role-change confirmation step | Burp Repeater request replay using a standard-user session | [Assessment 012](reports/012-multi-step-process-access-control.md) |
 
 | 013 | Referer-based access control | Privilege escalation by replaying role change with a normal user's session and admin-page Referer | Session and Referer header testing in Burp Repeater | [Assessment 013](reports/013-referer-based-access-control.md) |
+| 014 | Username enumeration via different responses | Valid accounts disclosed by distinguishable login error messages | Burp Intruder username and password testing | [Assessment 014](reports/014-username-enumeration-via-different-responses.md) |
 
-**Outcome:** All thirteen assessments completed successfully in PortSwigger Web Security Academy.
+**Outcome:** All fourteen assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
@@ -40,12 +41,13 @@ Documented web application security assessments covering endpoint discovery, aut
 - Verified method-dependent authorization failure by comparing rejected POST with successful GET role-change requests
 - Demonstrated a multi-step workflow authorization bypass by replaying a privileged confirmation request as a standard user
 - Verified privilege escalation through a role-management endpoint that relied on the Referer header instead of enforcing user permissions
+- Identified username enumeration through distinguishable login failure messages and analyzed Intruder responses
 - Analyzed web requests, endpoints, and application behavior using Burp Suite and browser inspection tools
 - Documented findings with reproduction steps, impact, and remediation recommendations
 
 ## Tools
 
-Burp Suite (Proxy and Repeater) · HTTP/HTTPS · HTML/JavaScript source inspection · Browser tools
+Burp Suite (Proxy, Repeater, and Intruder) · HTTP/HTTPS · HTML/JavaScript source inspection · Browser tools
 
 ## Evidence
 
