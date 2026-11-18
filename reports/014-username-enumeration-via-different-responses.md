@@ -1,42 +1,43 @@
-# Assessment 014 — Username Enumeration via Different Responses
+# Assessment 014 — Username Enumeration via Subtly Different Responses
 
 **Assessment type:** Authentication security  
 **Environment:** PortSwigger Web Security Academy — intentionally vulnerable, authorized lab  
-**Status:** Solved (verified by lab completion banner)  
-**Tools:** Burp Suite Community Edition (Proxy, Repeater, Intruder), browser
+**Status:** Solved — confirmed by PortSwigger completion banner  
+**Tools:** Burp Suite Community Edition (Repeater and Intruder), browser
 
 ## 1. Assessment Overview
-Assessed the login endpoint for information disclosure caused by distinguishable authentication failure messages. Tested candidate usernames with a constant password and compared the application's responses.
+Tested the authentication endpoint for username enumeration and followed up with password testing against an identified account in the authorized PortSwigger lab. The lab was ultimately solved by logging in as `akamai`.
 
 ## 2. Testing Methodology
-1. Captured an HTTP `POST /login` request and verified its behavior in Burp Repeater.
-2. Sent the login request to Burp Intruder, configured a single username payload position, and loaded the Academy-provided candidate username list.
-3. Submitted the candidate requests and inspected response status, length, and response bodies.
-4. Identified differing application messages for invalid usernames versus valid usernames supplied with an incorrect password.
-5. Conducted further password testing in the authorized lab and verified successful login and lab completion.
+1. Captured and replayed `POST /login` requests in Burp Suite.
+2. Configured Burp Intruder with a single username payload position and examined candidate responses, including response lengths and extracted login messages.
+3. Used the candidate username identified during testing, `akamai`, for a separate password payload run.
+4. Compared password-test responses by HTTP status code, length, and extracted login warning.
+5. Verified the anomalous response and authenticated account in the browser.
 
 ## 3. Vulnerability Identified
-**Username enumeration through distinguishable login responses.**
+**Username enumeration through subtly different authentication responses.**
 
-The login form returned `Invalid username` for a nonexistent account but `Incorrect password` for an existing account with an incorrect password. An unauthenticated requester could therefore establish whether a candidate username exists without knowing its password.
+The lab's authentication behavior allows an attacker to distinguish valid usernames from invalid ones by comparing responses to unsuccessful login attempts. This reduces the uncertainty of subsequent password guessing. The password-testing result is a separate confirmation of successful authentication, not itself proof of the username-enumeration weakness.
 
 ## 4. Proof of Concept and Evidence
-- The Intruder results for the username test showed numerous HTTP `200` responses of length `3352`, while one inspected response for the candidate `ai` was length `3354` and contained `Incorrect password`.
-- A subsequent Intruder results screenshot from a separate run shows an HTTP `302 Found` response for the payload `daniel`, with `Location: /my-account?id=ai` and a session cookie. This is evidence of a successful authentication response, but the username in the payload and redirect differ; no assertion is made that the redirect identifies the submitted username.
-- The final browser screenshot displays `Congratulations, you solved the lab!` and an authenticated account page displaying username `ai`.
-- The submitted screenshots capture the username enumeration, successful response, configured Intruder payload lists, and lab completion. **Screenshots are not yet embedded in this repository report.**
+- During password testing, most visible Intruder responses returned HTTP `200` with the extracted warning `Invalid username or password.`.
+- The payload `chelsea` (request 83) produced HTTP `302`, response length `188`, and no extracted invalid-login warning in the results shown.
+- The browser then displayed `/my-account?id=akamai`, identified the authenticated user as `akamai`, and showed PortSwigger's **Solved** banner and **Congratulations, you solved the lab!** message.
+- The user's earlier username-testing observations informed the assessment; the supplied final screenshots directly substantiate the password-response anomaly and completed login. They do not, by themselves, show the exact subtle username-response difference.
+- Evidence screenshots were supplied in the assessment conversation; they are not embedded in this repository report.
 
 ## 5. Security Impact
-An attacker could reduce the uncertainty of password guessing by first discovering valid accounts. This information disclosure increases the effectiveness of credential-stuffing or password-spraying attempts, especially when other authentication protections are insufficient.
+Distinguishable authentication responses can expose valid account names, making password attacks more targeted. If combined with weak passwords and insufficient authentication protections, this may enable unauthorized account access.
 
 ## 6. Remediation Recommendations
-- Use consistent, generic failure messages for nonexistent usernames and incorrect passwords.
-- Avoid revealing account validity through differing HTTP status codes, response structures, or obvious timing discrepancies.
-- Apply risk-based login rate limits, monitoring, and multifactor authentication as defense in depth.
-- Test the full authentication workflow to confirm that error handling does not leak account existence through alternate paths.
+- Return uniform login-failure messages and avoid differences that disclose whether a username exists.
+- Review response status, body, length, and timing for username-dependent discrepancies.
+- Apply login rate limits and monitoring, with multifactor authentication as defense in depth.
+- Validate the controls against automated enumeration and credential-guessing attempts.
 
 ## 7. Technical Analysis
-The weakness is **not** the use of HTTP `200` for unsuccessful login attempts. It is the difference in the information disclosed by unsuccessful responses. The `302` redirect and lab completion are separate evidence of successful authentication, not the underlying enumeration flaw.
+An HTTP `200` does not imply a successful login. In the password test, the `302` response was the standout result; the authenticated account page and PortSwigger completion banner provided stronger confirmation of success. The core vulnerability remains username enumeration via differing unsuccessful-login responses.
 
 ## Assessment Scope
 This is an authorized PortSwigger Web Security Academy training assessment, not a commercial client engagement.
