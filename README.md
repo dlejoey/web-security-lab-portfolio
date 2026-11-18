@@ -25,8 +25,9 @@ Documented web application security assessments covering endpoint discovery, aut
 
 | 013 | Referer-based access control | Privilege escalation by replaying role change with a normal user's session and admin-page Referer | Session and Referer header testing in Burp Repeater | [Assessment 013](reports/013-referer-based-access-control.md) |
 | 014 | Username enumeration via different responses | Valid accounts disclosed by distinguishable login error messages | Burp Intruder username and password testing | [Assessment 014](reports/014-username-enumeration-via-different-responses.md) |
+| 015 | Username enumeration via subtly different responses | Authentication response discrepancy and verified login as akamai | Burp Intruder response analysis and password testing | [Assessment 015](reports/015-username-enumeration-via-subtly-different-responses.md) |
 
-**Outcome:** All fourteen assessments completed successfully in PortSwigger Web Security Academy.
+**Outcome:** All fifteen assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
