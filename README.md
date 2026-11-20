@@ -27,7 +27,7 @@ Documented web application security assessments covering endpoint discovery, aut
 | 014 | Username enumeration via different responses | Valid accounts disclosed by distinguishable login error messages | Burp Intruder username and password testing | [Assessment 014](reports/014-username-enumeration-via-different-responses.md) |
 | 015 | Username enumeration via subtly different responses | Authentication response discrepancy and verified login as akamai | Burp Intruder response analysis and password testing | [Assessment 015](reports/015-username-enumeration-via-subtly-different-responses.md) |
 
-| 016 | 2FA simple bypass | Access to Carlos's account without completing second-factor verification | Direct navigation to account endpoint after password authentication | Report pending |
+| 016 | 2FA simple bypass | Access to Carlos's account without completing second-factor verification | Direct navigation to account endpoint after password authentication | [Assessment 016](reports/016-2fa-simple-bypass.md) |
 | 017 | Password reset broken logic | Account takeover through empty reset token and altered username | Burp Repeater password-reset request modification | [Assessment 017](reports/017-password-reset-broken-logic.md) |
 
 **Outcome:** Seventeen numbered assessments completed successfully in PortSwigger Web Security Academy (assessment 016 completed separately; report pending).
