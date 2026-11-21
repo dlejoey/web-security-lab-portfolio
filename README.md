@@ -16,21 +16,18 @@ Documented web application security assessments covering endpoint discovery, aut
 | 006 | URL-based access control can be circumvented | Admin access through X-Original-URL header | Request header testing in Burp Repeater | [Assessment 006](reports/006-url-based-access-control-bypass.md) |
 | 007 | Method-based access control can be circumvented | Privilege escalation through inconsistent GET/POST authorization | HTTP method and query-parameter testing in Burp Repeater | [Assessment 007](reports/007-method-based-access-control.md) |
 | 008 | User ID controlled by request parameter | Cross-account disclosure of Carlos's API key | User ID query-parameter testing in Burp Repeater | [Assessment 008](reports/008-user-id-controlled-by-request-parameter.md) |
-
 | 009 | User ID controlled by request parameter, with unpredictable user IDs | Cross-account API key disclosure despite unpredictable IDs | Public blog-author identifier discovery and account ID substitution | [Assessment 009](reports/009-user-id-unpredictable-ids.md) |
 | 010 | User ID controlled by request parameter with data leakage in redirect | Carlos's API key exposed in the HTTP response despite redirect behavior | Burp Repeater response-body inspection | [Assessment 010](reports/010-user-id-data-leakage-in-redirect.md) |
 | 011 | User ID controlled by request parameter with password disclosure | Administrator password disclosed, enabling account takeover | Account ID manipulation and HTML response inspection | [Assessment 011](reports/011-user-id-password-disclosure.md) |
-
 | 012 | Multi-step process with no access control on one step | Privilege escalation through an unprotected role-change confirmation step | Burp Repeater request replay using a standard-user session | [Assessment 012](reports/012-multi-step-process-access-control.md) |
-
 | 013 | Referer-based access control | Privilege escalation by replaying role change with a normal user's session and admin-page Referer | Session and Referer header testing in Burp Repeater | [Assessment 013](reports/013-referer-based-access-control.md) |
 | 014 | Username enumeration via different responses | Valid accounts disclosed by distinguishable login error messages | Burp Intruder username and password testing | [Assessment 014](reports/014-username-enumeration-via-different-responses.md) |
 | 015 | Username enumeration via subtly different responses | Authentication response discrepancy and verified login as akamai | Burp Intruder response analysis and password testing | [Assessment 015](reports/015-username-enumeration-via-subtly-different-responses.md) |
-
 | 016 | 2FA simple bypass | Access to Carlos's account without completing second-factor verification | Direct navigation to account endpoint after password authentication | [Assessment 016](reports/016-2fa-simple-bypass.md) |
 | 017 | Password reset broken logic | Account takeover through empty reset token and altered username | Burp Repeater password-reset request modification | [Assessment 017](reports/017-password-reset-broken-logic.md) |
+| 018 | 2FA broken logic | Four-digit MFA code brute-forcing led to an authenticated session for Carlos | Burp Intruder numeric payload testing, followed by Repeater session replay | [Assessment 018](reports/018-2fa-broken-logic.md) |
 
-**Outcome:** Seventeen numbered assessments completed successfully in PortSwigger Web Security Academy (assessment 016 completed separately; report pending).
+**Outcome:** Eighteen numbered assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
@@ -45,8 +42,9 @@ Documented web application security assessments covering endpoint discovery, aut
 - Verified method-dependent authorization failure by comparing rejected POST with successful GET role-change requests
 - Demonstrated a multi-step workflow authorization bypass by replaying a privileged confirmation request as a standard user
 - Verified privilege escalation through a role-management endpoint that relied on the Referer header instead of enforcing user permissions
-- Identified username enumeration through distinguishable login failure messages and analyzed Intruder responses
-- Analyzed web requests, endpoints, and application behavior using Burp Suite and browser inspection tools
+- Identified username enumeration through distinguishable and subtly different login responses
+- Tested password-reset logic and multi-factor authentication controls, including 2FA bypass and verification-code brute-forcing
+- Analyzed web requests, endpoints, sessions, and application behavior using Burp Suite and browser inspection tools
 - Documented findings with reproduction steps, impact, and remediation recommendations
 
 ## Tools
