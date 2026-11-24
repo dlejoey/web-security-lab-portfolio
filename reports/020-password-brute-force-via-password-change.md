@@ -14,14 +14,14 @@ Tested whether the password-change workflow could be abused to identify another 
 
 1. Logged in to the lab with the provided account and opened the password-change form.
 2. Submitted a password-change request and sent it to Burp Repeater from Proxy HTTP history. Interception did not need to remain enabled; the captured request could be replayed directly in Repeater.
-3. Set the target username to `carlos`.
+3. Set the target username to the lab's target account.
 4. Kept the two new-password values different (for example, `test123` and `test456`). This ensured that a request with a valid current password would progress to the new-password confirmation check and return a distinguishable error.
 5. Sent the request to Intruder and placed a single payload position around the `current-password` value.
 6. Loaded candidate passwords and ran the attack.
-7. Compared response lengths and bodies. Candidate `112233` produced a response length of **4114**, while the ordinary responses were **4117**. The shorter response contained the message **“New passwords do not match”**, showing that the current-password check had succeeded and processing had reached the confirmation check.
-8. Used `112233` as Carlos's password to log in to the lab.
+7. Compared response lengths and bodies. One candidate produced a response length of **4114**, while ordinary responses were **4117**. The shorter response contained the message **“New passwords do not match”**, showing that the current-password check had succeeded and processing had reached the confirmation check.
+8. Used the identified candidate to log in to the target account.
 
-**Verified result:** Successfully accessed Carlos's account, and PortSwigger displayed the **Solved** banner. The candidate password is recorded here because it is a lab credential, not a real user's credential.
+**Verified result:** Successfully accessed the target account, and PortSwigger displayed the **Solved** banner. The candidate password is intentionally omitted from this public report.
 
 ## Finding
 
