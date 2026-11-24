@@ -8,6 +8,7 @@ Documented web application security assessments covering endpoint discovery, aut
 
 | ID | Assessment | Verified issue | Discovery method | Report |
 | --- | --- | --- | --- | --- |
+| 020 | Password brute-force via password change | Candidate current password validated through distinguishable password-confirmation error | Burp Intruder response-length/body comparison, followed by login verification | [Assessment 020](reports/020-password-brute-force-via-password-change.md) |
 | 019 | Password reset poisoning via middleware | Password-reset token exposed through a poisoned reset link generated using an untrusted X-Forwarded-Host header | Header manipulation in Burp Repeater and token capture in the exploit-server log | [Assessment 019](reports/019-password-reset-poisoning-via-middleware.md) |
 | 001 | Unprotected admin functionality | Unauthorized access to administrative user-management functionality | `robots.txt` | [Assessment 001](reports/001-unprotected-admin-functionality.md) |
 | 002 | Unprotected admin functionality with unpredictable URL | Unauthorized access to administrative functionality despite a hidden navigation link | Client-side JavaScript inspection | [Assessment 002](reports/002-unpredictable-admin-url.md) |
@@ -28,7 +29,7 @@ Documented web application security assessments covering endpoint discovery, aut
 | 017 | Password reset broken logic | Account takeover through empty reset token and altered username | Burp Repeater password-reset request modification | [Assessment 017](reports/017-password-reset-broken-logic.md) |
 | 018 | 2FA broken logic | Four-digit MFA code brute-forcing led to an authenticated session for Carlos | Burp Intruder numeric payload testing, followed by Repeater session replay | [Assessment 018](reports/018-2fa-broken-logic.md) |
 
-**Outcome:** Nineteen numbered assessments completed successfully in PortSwigger Web Security Academy.
+**Outcome:** Twenty numbered assessments completed successfully in PortSwigger Web Security Academy.
 
 ## Demonstrated capabilities
 
@@ -44,7 +45,7 @@ Documented web application security assessments covering endpoint discovery, aut
 - Demonstrated a multi-step workflow authorization bypass by replaying a privileged confirmation request as a standard user
 - Verified privilege escalation through a role-management endpoint that relied on the Referer header instead of enforcing user permissions
 - Identified username enumeration through distinguishable and subtly different login responses
-- Tested password-reset logic and multi-factor authentication controls, including 2FA bypass, verification-code brute-forcing, and password-reset poisoning through an untrusted forwarded-host header
+- Tested password-reset logic and multi-factor authentication controls, including 2FA bypass, verification-code brute-forcing, password-reset poisoning through an untrusted forwarded-host header, and password validation through a password-change workflow
 - Analyzed web requests, endpoints, sessions, and application behavior using Burp Suite and browser inspection tools
 - Documented findings with reproduction steps, impact, and remediation recommendations
 
